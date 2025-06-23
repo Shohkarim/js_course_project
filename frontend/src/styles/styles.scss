@@ -1,0 +1,229 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sidebar {
+  div.img {
+    text-align: center;
+  }
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #eee;
+}
+
+
+//создание категории доходов
+
+main {
+  min-height: 100vh;
+  background-color: #fff;
+  padding-top: 40px;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #002b5b;
+}
+
+form input::placeholder {
+  color: #999;
+}
+
+.category-card {
+  width: 352px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  h5 {
+    font-size: 28px;
+  }
+
+  .btn-primary {
+    width: 134px;
+    height: 38px;
+  }
+
+  .btn-danger {
+    width: 88px;
+    height: 38px;
+  }
+}
+
+
+.add-category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-category:hover {
+  color: #333;
+  border-color: #aaa;
+}
+
+/* страница доходы и расходы горизонтальные линии в таблице */
+.custom-table {
+  border-collapse: collapse;
+}
+
+.custom-table thead tr {
+  border-top: 2px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.custom-table td,
+.custom-table th {
+  border: none;
+}
+
+//dashboard css
+
+
+.filters {
+  margin-bottom: 140px;
+
+  .filter-btn {
+    width: 100px;
+    height: 38px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #343a40;
+    font-weight: 500;
+
+    &.active {
+      background-color: #6c757d;
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: #6c757d;
+      color: #fff;
+    }
+  }
+
+  .date-filter {
+    margin-left: 9px;
+
+    span {
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    .date-link {
+      text-decoration: underline;
+      color: #6c757d;
+      font-weight: 500;
+
+      &:hover {
+        color: #343a40;
+      }
+
+      &:not(:last-child) {
+        margin-right: 9px; // строгое соответствие макету
+      }
+    }
+  }
+}
+
+// конвас
+.charts-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  max-width: 1150px;
+
+  .chart-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 437px; // по макету
+
+    .chart-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #390065;
+      margin-bottom: 12px;
+    }
+
+    canvas {
+      width: 360px !important;
+      height: 360px !important;
+    }
+  }
+
+  .chart-divider {
+    width: 1px;
+    background-color: #ccc;
+    height: 452px;
+    margin: 0 84px;
+  }
+}
+
+
+//legend
+
+.custom-legend {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #2a2a75;
+
+    .legend-color {
+      width: 35px;
+      height: 10px;
+    }
+  }
+}
+
+
+//action buttons in page profit/costs
+.profit-title {
+  margin-top: 70px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+
+  .icon-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 18px;
+    color: #000;
+    cursor: pointer;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+}
+
+
+

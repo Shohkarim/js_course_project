@@ -1,0 +1,53 @@
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="" style="max-width: 500px; width: 100%;">
+        <div class="text-center mb-3">
+            <img src="/images/Logo.png" alt=" logo">
+        </div>
+        <h3 class="text-center mb-4">Создайте аккаунт</h3>
+        <form id="registerForm" novalidate>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control" id="surname"  placeholder="Имя">
+                    <div class="invalid-feedback">Фамилия с большой буквы, только русские буквы и пробелы.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="name" placeholder="Фамилия" >
+                    <div class="invalid-feedback">Имя с большой буквы, только русские буквы и пробелы.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control" id="email" placeholder="Электронная почта">
+                    <div class="invalid-feedback">Введите корректный email.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="password" placeholder="Пароль" >
+                    <div class="invalid-feedback">
+                        Минимум 8 символов, одна заглавная буква и одна цифра.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-shield-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Подтверждение пароля">
+                    <div class="invalid-feedback">Пароли должны совпадать.</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Войти</button>
+        </form>
+        <p class="text-center mt-3">
+            Уже зарегистрированы? <a href="/login">Войдите в систему</a>
+        </p>
+    </div>
+</div>
+

@@ -1,0 +1,35 @@
+
+<div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="" style="max-width: 400px; width: 100%;">
+        <div class="text-center mb-3">
+            <img src="/images/Logo.png" />
+        </div>
+        <h2 class="text-center mb-4">Вход</h2>
+        <form id="loginForm" novalidate>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" placeholder="Электронная почта" required>
+                </div>
+                <div class="invalid-feedback">Введите корректный email</div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" placeholder="Пароль" id="password" required>
+                </div>
+                <div class="invalid-feedback">Введите пароль</div>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">
+                    Запомнить меня
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Войти</button>
+        </form>
+        <p class="text-center mt-3">
+            Нет аккаунта? <a href="/sign-up">Пройдите регистрацию</a>
+        </p>
+    </div>
+</div>

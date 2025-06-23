@@ -1,0 +1,84 @@
+<div class="container-fluid mt-4 px-4">
+    <h2 class="mb-5 profit-title">Доходы и Расходы</h2>
+
+    <!-- Кнопки -->
+    <div class="mb-5 d-flex gap-2">
+        <button class="btn btn-success">Создать доход</button>
+        <button class="btn btn-danger">Создать расход</button>
+    </div>
+
+    <!-- Фильтрация -->
+    <div class="filters d-flex flex-wrap align-items-center gap-2 mb-4">
+
+        <!-- Кнопки выбора периода -->
+        <button class="btn filter-btn active">Сегодня</button>
+        <button class="btn filter-btn">Неделя</button>
+        <button class="btn filter-btn">Месяц</button>
+        <button class="btn filter-btn">Год</button>
+        <button class="btn filter-btn">Все</button>
+        <button class="btn filter-btn">Интервал</button>
+
+        <div class="date-filter d-flex align-items-center ms-3">
+            <span class="me-1">с  </span>
+            <a class="date-link me-2" href="#">Дата</a>
+            <span class="me-1">по  </span>
+            <a class="date-link" href="#">Дата</a>
+        </div>
+    </div>
+
+
+    <!-- Таблица -->
+    <table class="table custom-table align-middle table table-bordered">
+        <thead>
+        <tr class="align-middle text-center">
+            <th>№ операции</th>
+            <th>Тип</th>
+            <th>Категория</th>
+            <th>Сумма</th>
+            <th>Дата</th>
+            <th>Комментарий</th>
+        </tr>
+        </thead>
+        <tbody class="align-middle">
+        <tr class="align-middle text-center">
+            <td>1</td>
+            <td><span class="text-success">Доход</span></td>
+            <td>Зарплата</td>
+            <td>1000 $</td>
+            <td>2025-06-18</td>
+            <td>Бонус за проект</td>
+            <td class="text-end">
+                <div class="action-buttons">
+                    <button class="icon-btn">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </div>
+
+            </td>
+        </tr>
+        <tr class="align-middle text-center">
+            <td>1</td>
+            <td><span class="text-danger">Расход</span></td>
+            <td>Зарплата</td>
+            <td>1000 $</td>
+            <td>2025-06-18</td>
+            <td>Бонус за проект</td>
+            <td class="text-end">
+                <div class="action-buttons">
+                    <button class="icon-btn">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <!-- другие строки -->
+        </tbody>
+    </table>
+</div>
+
