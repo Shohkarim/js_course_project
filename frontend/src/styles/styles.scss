@@ -1,3 +1,8 @@
+.content-wrapper {
+  margin-left: 17%;
+}
+
+
 .container {
   display: flex;
   justify-content: flex-start;
@@ -38,6 +43,7 @@ form input::placeholder {
 
 .category-card {
   width: 352px;
+  height: 121px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -145,8 +151,9 @@ form input::placeholder {
 // конвас
 .charts-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
   margin-top: 40px;
   max-width: 1150px;
 

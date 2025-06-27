@@ -10,6 +10,7 @@ import {EditCosts} from "./components/edit-costs.js";
 import {ProfitCosts} from "./components/profit-costs.js";
 import {CreateProfitCosts} from "./components/create-profit-costs.js";
 import {EditProfitCosts} from "./components/edit-profit-costs.js";
+import {Sidebar} from "./components/sidebar.js";
 
 export class Router {
     constructor() {
@@ -25,7 +26,9 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: async () => {
                     await new Promise(resolve => setTimeout(resolve, 50));
+                    new Sidebar();
                     new Dashboard();
+
                 }
             },
             {

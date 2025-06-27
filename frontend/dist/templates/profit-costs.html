@@ -1,14 +1,14 @@
 <div class="container-fluid mt-4 px-4">
-    <h2 class="mb-3">Доходы и Расходы</h2>
+    <h2 class="mb-5 profit-title">Доходы и Расходы</h2>
 
     <!-- Кнопки -->
-    <div class="mb-4 d-flex gap-2">
+    <div class="mb-5 d-flex gap-2">
         <button class="btn btn-success">Создать доход</button>
         <button class="btn btn-danger">Создать расход</button>
     </div>
 
     <!-- Фильтрация -->
-    <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+    <div class="filters d-flex flex-wrap align-items-center gap-2 mb-4">
 
         <!-- Кнопки выбора периода -->
         <button class="btn filter-btn active">Сегодня</button>
@@ -48,12 +48,15 @@
             <td>2025-06-18</td>
             <td>Бонус за проект</td>
             <td class="text-end">
-                <button class="btn btn-outline-secondary btn-sm me-1">
-                    <i class="bi bi-pencil"></i>
-                </button>
-                <button class="btn btn-outline-danger btn-sm">
-                    <i class="bi bi-trash"></i>
-                </button>
+                <div class="action-buttons">
+                    <button class="icon-btn">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </div>
+
             </td>
         </tr>
         <tr class="align-middle text-center">
@@ -64,12 +67,14 @@
             <td>2025-06-18</td>
             <td>Бонус за проект</td>
             <td class="text-end">
-                <button class="btn btn-outline-secondary btn-sm me-1">
-                    <i class="bi bi-pencil"></i>
-                </button>
-                <button class="btn btn-outline-danger btn-sm">
-                    <i class="bi bi-trash"></i>
-                </button>
+                <div class="action-buttons">
+                    <button class="icon-btn">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </div>
             </td>
         </tr>
         <!-- другие строки -->
