@@ -1,6 +1,5 @@
 import {Dashboard} from "./components/dashbord.js";
-import {SignUp} from "./components/sign-up.js";
-import {Login} from "./components/login.js";
+import {Form} from "./components/form.js";
 import {CategoryProfit} from "./components/category-profit.js";
 import {CreateProfit} from "./components/create-profit.js";
 import {EditProfit} from "./components/edit-profit.js";
@@ -124,7 +123,7 @@ export class Router {
                 filePathTemplate: '/templates/login.html',
                 userLayout: false,
                 load: () => {
-                    new Login();
+                    new Form();
                 }
             },
             {
@@ -133,7 +132,7 @@ export class Router {
                 filePathTemplate: '/templates/sign-up.html',
                 userLayout: false,
                 load: () => {
-                    new SignUp();
+                    new Form();
                 }
             },
         ]
