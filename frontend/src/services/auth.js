@@ -22,15 +22,15 @@ export class Auth {
             if (response && response.status === 200) {
                 const result = await response.json();
                 if (result && !result.error) {
-                this.setTokens(result.accessToken, result.refreshToken);
-                return true;
+                    this.setTokens(result.accessToken, result.refreshToken);
+                    return true;
                 }
             }
         }
 
         this.removeTokens();
-        location.href = '#/';
-        return  false;
+        location.href = '/sign-up';
+        return false;
     }
 
     static async logout() {
@@ -68,16 +68,16 @@ export class Auth {
         localStorage.removeItem(this.refreshTokenKey);
     }
 
-    static setUserInfo(info){
+    static setUserInfo(info) {
         localStorage.setItem(this.userInfoKey, JSON.stringify(info));
     }
 
-    static getUserInfo(){
+    static getUserInfo() {
         const userInfo = localStorage.getItem(this.userInfoKey);
-        if(userInfo){
+        if (userInfo) {
             return JSON.parse(userInfo);
         }
-        return  null;
+        return null;
     }
 
 }

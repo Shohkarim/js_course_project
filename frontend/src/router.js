@@ -11,6 +11,7 @@ import {CreateProfitCosts} from "./components/create-profit-costs.js";
 import {EditProfitCosts} from "./components/edit-profit-costs.js";
 import {Sidebar} from "./components/sidebar.js";
 
+
 export class Router {
     constructor() {
         this.titlePageElement = document.getElementById('title');
@@ -123,7 +124,7 @@ export class Router {
                 filePathTemplate: '/templates/login.html',
                 userLayout: false,
                 load: () => {
-                    new Form();
+                    new Form(this.openNewRoute.bind(this), 'login');
                 }
             },
             {
@@ -132,20 +133,37 @@ export class Router {
                 filePathTemplate: '/templates/sign-up.html',
                 userLayout: false,
                 load: () => {
-                    new Form();
+                    new Form(this.openNewRoute.bind(this), 'sign-up');
                 }
             },
         ]
     }
 
     initEvents() {
-        window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
+        window.addEventListener('DOMContentLoaded', () => {
+            const accessToken = localStorage.getItem('accessToken');
+            const currentPath = window.location.pathname;
+
+            if (!accessToken && currentPath === '/') {
+                history.replaceState({}, '', '/sign-up');
+            }
+
+            this.activateRoute();
+        });
+
+
+        // window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
         window.addEventListener('popstate', this.activateRoute.bind(this));
-        document.addEventListener('click', this.openNewRoute.bind(this));
+        document.addEventListener('click', this.clickHandler.bind(this));
     }
 
+    async openNewRoute(url) {
+        const currentRoute = window.location.pathname;
+        history.pushState({}, '', url);
+        await this.activateRoute(null, currentRoute);
+    }
 
-    async openNewRoute(e) {
+    async clickHandler(e) {
         let element = null;
         if (e.target.nodeName === 'A') {
             element = e.target;
@@ -158,11 +176,10 @@ export class Router {
             const url = element.href.replace(window.location.origin, '');
 
             if (!url || url === '#' || url.startsWith('javascript:void(0);')) {
-                return;
+
             }
-            const currentRoute = window.location.pathname;
-            history.pushState({}, '', url);
-            await this.activateRoute(null, currentRoute);
+
+            await this.openNewRoute(url);
         }
     }
 
@@ -170,58 +187,52 @@ export class Router {
     async activateRoute(e, oldRoute = null) {
         if (oldRoute) {
             const currentRoute = this.routes.find(item => item.route === oldRoute);
-            if (currentRoute.styles && currentRoute.styles.length > 0) {
-                currentRoute.styles.forEach(style => {
-                    document.querySelector(`link[href='/css/${style}']`).remove();
-                });
-            }
-            if (currentRoute.unload && typeof currentRoute.load) {
+            if (currentRoute?.unload && typeof currentRoute.unload === 'function') {
                 currentRoute.unload();
             }
         }
 
-
         const urlRoute = window.location.pathname;
         const newRoute = this.routes.find(item => item.route === urlRoute);
+        const accessToken = localStorage.getItem('accessToken');
+
+        // 🔒 Защита: если нет токена и пытаемся попасть на закрытую страницу — редирект на /login
+        if (!accessToken && newRoute && newRoute.userLayout) {
+            history.replaceState({}, '', '/login');
+            await this.activateRoute();
+            return;
+        }
 
         if (newRoute) {
-            if (newRoute.styles && newRoute.styles.length > 0) {
-                newRoute.styles.forEach(style => {
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = '/css/' + style;
-                    document.head.insertBefore(link, this.adminLteStyleElement);
-                })
-            }
             if (newRoute.title) {
-                this.titlePageElement.innerText = newRoute.title + 'Financial page';
+                this.titlePageElement.innerText = `${newRoute.title} | Financial page`;
             }
 
             if (newRoute.filePathTemplate) {
                 document.body.className = '';
                 let contentBlock = this.contentPageElement;
+
                 if (newRoute.userLayout) {
-                    this.contentPageElement.innerHTML = await fetch(newRoute.userLayout).then(response => response.text());
+                    this.contentPageElement.innerHTML = await fetch(newRoute.userLayout).then(res => res.text());
                     contentBlock = document.getElementById('content-layout');
-                    // document.body.classList.add('sidebar-mini');
-                    // document.body.classList.add('layout-fixed');
-
-                } else {
-                    // document.body.classList.remove('sidebar-mini');
-                    // document.body.classList.remove('layout-fixed');
+                    new Sidebar();
                 }
-                contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
+
+                // Загружаем шаблон страницы
+                contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(res => res.text());
+
+                // Ожидаем, пока DOM обновится, и только потом вызываем load
+                if (newRoute.load && typeof newRoute.load === 'function') {
+                    requestAnimationFrame(() => {
+                        newRoute.load();
+                    });
+                }
             }
-
-
-            if (newRoute.load && typeof newRoute.load) {
-                await newRoute.load();
-            }
-
         } else {
-            console.log('No route found');
+            console.warn('Route not found, redirecting to /404');
             history.pushState({}, '', '/404');
             await this.activateRoute();
         }
     }
+
 }
