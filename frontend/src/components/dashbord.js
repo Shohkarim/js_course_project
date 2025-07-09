@@ -6,8 +6,22 @@ export class Dashboard {
     }
 
     renderCharts() {
-        const incomeCtx = document.getElementById('incomeChart').getContext('2d');
-        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        const incomeCanvas = document.getElementById('incomeChart');
+        const expenseCanvas = document.getElementById('expenseChart');
+
+        // Удаляем старые графики, если они уже существуют
+        const existingIncomeChart = Chart.getChart(incomeCanvas);
+        if (existingIncomeChart) {
+            existingIncomeChart.destroy();
+        }
+
+        const existingExpenseChart = Chart.getChart(expenseCanvas);
+        if (existingExpenseChart) {
+            existingExpenseChart.destroy();
+        }
+
+        const incomeCtx = incomeCanvas.getContext('2d');
+        const expenseCtx = expenseCanvas.getContext('2d');
 
         new Chart(incomeCtx, {
             type: 'pie',
@@ -45,5 +59,4 @@ export class Dashboard {
             }
         });
     }
-
 }
