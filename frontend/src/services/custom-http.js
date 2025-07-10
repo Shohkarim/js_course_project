@@ -2,42 +2,48 @@ import {Auth} from "./auth.js";
 
 export class CustomHttp {
     static async request(url, method = "GET", body = null) {
-
         const params = {
             method: method,
-            headers:
-                {
-                    'Content-type': "application/json",
-                    'Accept': 'application/json',
-                }
+            headers: {
+                'Content-type': "application/json",
+                'Accept': 'application/json'
+            }
         };
 
-        let token = localStorage.getItem(Auth.accessTokenKey);
-        if(token){
+        const token = localStorage.getItem(Auth.accessTokenKey);
+        if (token) {
             params.headers['x-access-token'] = token;
         }
 
-        if (body) {
+        if (body && method !== 'GET' && method !== 'HEAD') {
             params.body = JSON.stringify(body);
         }
 
         const response = await fetch(url, params);
 
-        if (response.status < 200 ||  response.status >= 300) {
-            if(response.status ===401){
-              const result = await  Auth.processUnauthorizedResponse();
-              if(result){
-
-                  return await this.request(url, method, body);
-
-              }else{
-                  return null;
-              }
-            }
-            throw new Error(response.message);
+        let responseBody;
+        try {
+            responseBody = await response.json();
+        } catch (e) {
+            throw new Error('Некорректный ответ от сервера');
         }
 
-      return  await response.json();
+        if (!response.ok) {
+            if (response.status === 401) {
+                const result = await Auth.processUnauthorizedResponse();
+                if (result) {
+                    return await this.request(url, method, body);
+                } else {
+                    return null;
+                }
+            }
+            // ⚠️ Вместо выброса — верни объект с error = true
+            return {
+                error: true,
+                message: responseBody?.message || 'Произошла ошибка',
+            };
+        }
 
+        return responseBody;
     }
 }

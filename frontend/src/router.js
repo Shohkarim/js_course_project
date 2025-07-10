@@ -140,19 +140,7 @@ export class Router {
     }
 
     initEvents() {
-        window.addEventListener('DOMContentLoaded', () => {
-            const accessToken = localStorage.getItem('accessToken');
-            const currentPath = window.location.pathname;
-
-            if (!accessToken && currentPath === '/') {
-                history.replaceState({}, '', '/sign-up');
-            }
-
-            this.activateRoute();
-        });
-
-
-        // window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
+        window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this));
         window.addEventListener('popstate', this.activateRoute.bind(this));
         document.addEventListener('click', this.clickHandler.bind(this));
     }

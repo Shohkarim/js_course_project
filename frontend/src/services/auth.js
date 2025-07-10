@@ -21,15 +21,15 @@ export class Auth {
 
             if (response && response.status === 200) {
                 const result = await response.json();
-                if (result && !result.error) {
-                    this.setTokens(result.accessToken, result.refreshToken);
+                if (result.tokens && !result.error) {
+                    this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
                     return true;
                 }
             }
         }
 
         this.removeTokens();
-        location.href = '/sign-up';
+        location.href = '/login';
         return false;
     }
 
