@@ -3,20 +3,20 @@
         <div class="text-center mb-5">
             <img alt=" logo" src="/images/Logo.png" style="height: 71px; width: 171px;">
         </div>
-        <h3 class="text-center mb-4" style="font-size: 40px">Создайте аккаунт</h3>
+        <h3 class="form-title text-center mb-4" style="font-size: 40px">Создайте аккаунт</h3>
         <form id="registerForm" novalidate>
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input class="form-control" id="surname" placeholder="Имя" type="text">
-                    <div class="invalid-feedback">Фамилия с большой буквы, только русские буквы и пробелы.</div>
+                    <input class="form-control" id="name" placeholder="Имя" required type="text">
+                    <div class="invalid-feedback">Имя с большой буквы, только русские буквы и пробелы.</div>
                 </div>
             </div>
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input class="form-control" id="name" placeholder="Фамилия" type="text">
-                    <div class="invalid-feedback">Имя с большой буквы, только русские буквы и пробелы.</div>
+                    <input class="form-control" id="last-name" placeholder="Фамилия" required type="text">
+                    <div class="invalid-feedback">Фамилия с большой буквы, только русские буквы и пробелы.</div>
                 </div>
             </div>
             <div class="mb-3">
@@ -38,15 +38,17 @@
             <div class="mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input class="form-control" id="confirmPassword" placeholder="Подтверждение пароля" type="password">
+                    <input class="form-control" id="passwordRepeat" placeholder="Подтверждение пароля" type="password">
                     <div class="invalid-feedback">Пароли должны совпадать.</div>
                 </div>
             </div>
-            <button class="btn btn-primary w-100" type="submit">Войти</button>
+            <button class="btn btn-primary w-100" disabled id="process" type="button">Войти</button>
         </form>
         <p class="text-center mt-3">
             Уже есть аккаунт? <a href="/login">Войдите в систему</a>
         </p>
+        <div class="text-danger text-center mt-3" id="loginError" style="display: none;"></div>
+
     </div>
 </div>
 
