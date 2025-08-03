@@ -3,6 +3,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; // Стили
 import {Router} from "./router.js";
 import "./styles/styles.scss";
 import "./styles/sidebar.scss";
+import "./styles/adaptive.scss";
+import "./styles/sidebar-adaptive.scss";
 
 class App {
     constructor() {

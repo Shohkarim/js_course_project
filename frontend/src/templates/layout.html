@@ -1,46 +1,50 @@
+<!-- Хедер с бургер-меню (только на мобильных) -->
+<nav class="navbar navbar-light bg-white d-md-none px-3 py-2 border-bottom">
+    <img alt="Логотип" src="/images/Logo.png">
+    <button class="btn" id="burgerBtn">
+        <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+    </button>
+</nav>
+
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-2 sidebar" style="padding: 0;">
-            <div>
-                <div class="mb-4 logo">
+        <!-- Sidebar (адаптивный с выездом) -->
+        <div class="sidebar col-md-2 d-md-block" style="padding: 0;">
+            <!-- Контент сайдбара -->
+            <div class="sidebar-main">
+                <div class="mb-4 mt-4 logo text-center">
                     <img alt="Логотип" class="img-fluid" src="/images/Logo.png"/>
                 </div>
-                <ul class="nav flex-column">
+                <ul class="nav flex-column px-3">
                     <li class="nav-item mb-2">
                         <a class="nav-link" href="/"><i class="bi bi-house"></i> Главная</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#collapseCategories" role="button">
+                        <a class="nav-link" data-bs-toggle="collapse" href="/profit-costs" role="button">
                             <i class="bi bi-cash-coin"></i> Доходы & Расходы
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a aria-controls="collapseCategories" aria-expanded="false"
-                           class="nav-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse"
-                           href="#collapseCategories"
-                           role="button">
-                            <span> Категории</span>
+                           class="nav-link d-flex align-items-center justify-content-between"
+                           data-bs-toggle="collapse" href="#collapseCategories" role="button">
+                            <span>Категории</span>
                             <i class="bi bi-chevron-right" id="category-chevron"></i>
                         </a>
                         <div class="collapse ps-4" id="collapseCategories">
-                            <a class="nav-link" href="#/categories/income">Доходы</a>
-                            <a class="nav-link" href="#/categories/expense">Расходы</a>
+                            <a class="nav-link" href="/category-profit">Доходы</a>
+                            <a class="nav-link" href="/category-costs">Расходы</a>
                         </div>
                     </li>
-
                 </ul>
             </div>
 
-            <!-- Footer -->
-            <div class="text-start mb-3 small position-relative sidebar-footer ">
-                <div class="salary">Баланс: <a href="#">500$</a></div>
-                <div class="mt-2 mb-5 d-flex align-items-center gap-2">
-                    <i class="bi bi-person fs-5"></i> Shohkarim Dodov
-                </div>
-                <div class="user-dropdown position-absolute bg-white border rounded shadow-sm" id="userDropdown"
+            <!-- Футер -->
+            <div class="text-start small sidebar-footer px-3">
+                <div class="salary">Баланс: <a href="#" id="salary">500$</a></div>
+                <div class="mt-2 mb-5 d-flex align-items-center gap-2" id="user"></div>
+                <div class="user-dropdown position-absolute bg-white border rounded shadow-sm"
+                     id="userDropdown"
                      style="display: none; bottom: 60px; left: 0; width: 100%;">
                     <a class="dropdown-item text-danger py-2 px-3" href="#" id="logoutBtn">
                         <i class="bi bi-box-arrow-right me-2"></i> Выйти
@@ -49,9 +53,12 @@
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="content-wrapper col-10 p-4" id="content-layout">
 
+        <div class="sidebar-overlay d-md-none" id="sidebarOverlay"></div>
+
+        <!-- Основной контент -->
+        <div class="content-wrapper col-md-10 p-2" id="content-layout">
+            <!-- Тут будет подгружаемый контент -->
         </div>
     </div>
 </div>

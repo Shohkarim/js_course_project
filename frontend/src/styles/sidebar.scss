@@ -10,7 +10,8 @@ $sidebar-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: fixed;
   background-color: #ffffff;
   min-height: 100vh;
-  display: flex;
+  min-width: 230px;
+  display: flex !important;;
   flex-direction: column;
   justify-content: space-between;
 
@@ -58,6 +59,11 @@ $sidebar-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-left: 2rem;
   }
 
+  .collapse {
+    transform: none;
+    transition: none;
+  }
+
   .small {
     padding-top: 1rem;
     font-size: 0.875rem;
@@ -76,18 +82,20 @@ $sidebar-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       cursor: pointer;
     }
 
-    a {
-      color: #007bff;
-      font-weight: 500;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
 
     .salary {
       padding-left: 8px;
+
+      a {
+        color: #007bff;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
     }
 
     .d-flex {

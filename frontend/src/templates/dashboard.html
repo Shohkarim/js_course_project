@@ -1,14 +1,14 @@
-<main class=" ml-sm-auto px-4" role="main">
+<main class="dashboard ml-sm-auto px-4" role="main">
     <h1 class="h2 mb-5">Главная</h1>
 
     <!-- Кнопки фильтра -->
-    <div class="filters d-flex flex-wrap align-items-center gap-2">
-        <button class="btn filter-btn active">Сегодня</button>
-        <button class="btn filter-btn">Неделя</button>
-        <button class="btn filter-btn">Месяц</button>
-        <button class="btn filter-btn">Год</button>
-        <button class="btn filter-btn">Все</button>
-        <button class="btn filter-btn">Интервал</button>
+    <div class="filters d-flex flex-wrap align-items-center gap-2 dashboard-filter">
+        <button class="btn filter-btn active" data-period="today">Сегодня</button>
+        <button class="btn filter-btn" data-period="week">Неделя</button>
+        <button class="btn filter-btn" data-period="month">Месяц</button>
+        <button class="btn filter-btn" data-period="year">Год</button>
+        <button class="btn filter-btn" data-period="all">Все</button>
+        <button class="btn filter-btn" data-period="interval">Интервал</button>
 
         <div class="date-filter d-flex align-items-center ms-3">
             <span class="me-1">с  </span>
@@ -21,59 +21,40 @@
     <div class="charts-container">
         <div class="chart-box">
             <h5 class="chart-title">Доходы</h5>
-            <div class="custom-legend">
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#dc3545;"></div>
-                    Red
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#fd7e14;"></div>
-                    Orange
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#ffc107;"></div>
-                    Yellow
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#28a745;"></div>
-                    Green
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#007bff;"></div>
-                    Blue
-                </div>
-            </div>
+            <div class="custom-legend" id="incomeLegend"></div>
             <canvas height="360" id="incomeChart" width="360"></canvas>
         </div>
         <div class="chart-divider"></div>
 
         <div class="chart-box">
             <h5 class="chart-title">Расходы</h5>
-            <div class="custom-legend">
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#dc3545;"></div>
-                    Red
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#fd7e14;"></div>
-                    Orange
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#ffc107;"></div>
-                    Yellow
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#28a745;"></div>
-                    Green
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background-color:#007bff;"></div>
-                    Blue
-                </div>
-            </div>
+            <div class="custom-legend" id="expenseLegend"></div>
             <canvas height="360" id="expenseChart" width="360"></canvas>
         </div>
     </div>
-
-
 </main>
+<!-- Модалка выбора диапазона дат -->
+<div aria-hidden="true" class="modal fade" id="dateModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content rounded-4 shadow-sm">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Выбор периода</h5>
+                <button aria-label="Закрыть" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body pt-0">
+                <div class="mb-3">
+                    <label class="form-label small" for="startDateInput">Начальная дата</label>
+                    <input class="form-control rounded-3" id="startDateInput" type="date">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small" for="endDateInput">Конечная дата</label>
+                    <input class="form-control rounded-3" id="endDateInput" type="date">
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button class="btn btn-primary w-100 rounded-3" id="applyDateBtn" type="button">Применить</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,4 +1,6 @@
-[{
-  "user_id": 1,
-  "balance": 500
-}]
+[
+  {
+    "user_id": 1,
+    "balance": 1000
+  }
+]

@@ -1,7 +1,6 @@
-import config from "../../config/config";
+import config from "../../config/config.js";
 
 export class Auth {
-
     static accessTokenKey = 'accessToken';
     static refreshTokenKey = 'refreshToken';
     static userInfoKey = 'userInfo';
@@ -9,51 +8,58 @@ export class Auth {
     static async processUnauthorizedResponse() {
         const refreshToken = localStorage.getItem(this.refreshTokenKey);
         if (refreshToken) {
-            const response = await fetch(config.host + '/refresh', {
-                method: 'POST',
-                headers:
-                    {
+            try {
+                const response = await fetch(config.host + '/refresh', {
+                    method: 'POST',
+                    headers: {
                         'Content-type': "application/json",
                         'Accept': 'application/json',
                     },
-                body: JSON.stringify({refreshToken: refreshToken})
-            });
+                    body: JSON.stringify({refreshToken})
+                });
 
-            if (response && response.status === 200) {
-                const result = await response.json();
-                if (result.tokens && !result.error) {
-                    this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
-                    return true;
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.tokens && !result.error) {
+                        this.setTokens(result.tokens.accessToken, result.tokens.refreshToken);
+                        return true;
+                    }
                 }
+            } catch (e) {
+                console.error('Ошибка при обновлении токена:', e);
             }
         }
 
         this.removeTokens();
-        location.href = '/login';
+        localStorage.removeItem(this.userInfoKey);
+        window.location.href = '/login';
         return false;
     }
 
     static async logout() {
         const refreshToken = localStorage.getItem(this.refreshTokenKey);
         if (refreshToken) {
-            const response = await fetch(config.host + '/logout', {
-                method: 'POST',
-                headers:
-                    {
+            try {
+                const response = await fetch(config.host + '/logout', {
+                    method: 'POST',
+                    headers: {
                         'Content-type': "application/json",
                         'Accept': 'application/json',
                     },
-                body: JSON.stringify({refreshToken: refreshToken})
-            });
+                    body: JSON.stringify({refreshToken})
+                });
 
-            if (response && response.status === 200) {
-                const result = await response.json();
-                if (result && !result.error) {
-                    Auth.removeTokens();
-                    localStorage.removeItem(Auth.userInfoKey);
-                    localStorage.removeItem('userEmail');
-                    return true;
+                if (response.ok) {
+                    const result = await response.json();
+                    if (!result.error) {
+                        this.removeTokens();
+                        localStorage.removeItem(this.userInfoKey);
+                        localStorage.removeItem('userEmail');
+                        return true;
+                    }
                 }
+            } catch (e) {
+                console.error('Ошибка при выходе:', e);
             }
         }
     }
@@ -63,7 +69,7 @@ export class Auth {
         localStorage.setItem(this.refreshTokenKey, refreshToken);
     }
 
-    static removeTokens(accessToken, refreshToken) {
+    static removeTokens() {
         localStorage.removeItem(this.accessTokenKey);
         localStorage.removeItem(this.refreshTokenKey);
     }
@@ -74,10 +80,6 @@ export class Auth {
 
     static getUserInfo() {
         const userInfo = localStorage.getItem(this.userInfoKey);
-        if (userInfo) {
-            return JSON.parse(userInfo);
-        }
-        return null;
+        return userInfo ? JSON.parse(userInfo) : null;
     }
-
 }

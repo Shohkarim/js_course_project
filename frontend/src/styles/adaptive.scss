@@ -1,0 +1,100 @@
+@media (min-width: 1024px) and (max-width: 1380px) {
+  .content-wrapper {
+    margin-left: calc(230px + (100vw - 1000px) / -20);;
+  }
+  .charts-container {
+    justify-content: center;
+    align-items: center;
+
+    .chart-box {
+      margin: 0 42px 70px 42px;
+    }
+
+
+    .chart-box canvas {
+      width: 400px !important;
+      height: 400px !important;
+
+    }
+
+    .chart-divider {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .content-wrapper {
+    margin-left: calc(230px + (100vw - 1000px) / -20);
+  }
+  .charts-container {
+    justify-content: center;
+    align-items: center;
+
+    .chart-box {
+      margin: 0 42px 70px 42px;
+    }
+
+
+    .chart-box canvas {
+      width: 360px !important;
+      height: 360px !important;
+
+    }
+
+    .chart-divider {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content-wrapper {
+    margin-left: 0;
+
+    .dashboard-filter {
+      margin-bottom: 70px;
+    }
+
+    .profit-title {
+      font-size: calc(28px + (35 - 19) * ((100vw - 320px) / (768 - 320)));
+    }
+
+    .create-costs-title {
+      font-size: calc(24px + (35 - 24) * ((100vw - 475px) / (659 - 475)));
+    }
+
+    .create-profit-costs-title {
+      font-size: calc(40px + (40 - 18) * ((100vw - 768px) / (768 - 320)));
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .content-wrapper {
+
+
+    .chart-box canvas {
+      width: 310px !important;
+      height: 310px !important;
+    }
+
+    .profit-title {
+      margin-top: 40px;
+    }
+  }
+
+}
+
+@media (max-width: 320px) {
+  .content-wrapper {
+    padding: 1px;
+
+    .chart-box canvas {
+      width: 290px !important;
+      height: 290px !important;
+    }
+
+  }
+
+}

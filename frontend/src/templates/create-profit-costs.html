@@ -1,26 +1,36 @@
-<div class="container " style=" max-width: 570px; flex-wrap: wrap;">
-    <h2 class="fw-bold text-dark-blue mb-5" style="font-size: 40px;">Создание дохода/расхода</h2>
+<div class="container create-editing create-profit-costs" style="max-width: 570px; flex-wrap: wrap;">
+    <h2 class="fw-bold text-dark-blue mb-4 mt-4 create-profit-costs-title">Создание дохода/расхода</h2>
 
-    <form style="width: 397px; height: 38px">
+    <form id="operation-form" style="width: 397px;">
         <div class="mb-2">
-            <input class="form-control" placeholder="Тип..." type="text">
+            <select class="form-control" id="operation-type">
+                <option value="income">Доход</option>
+                <option value="expense">Расход</option>
+            </select>
         </div>
         <div class="mb-2">
-            <input class="form-control" placeholder="Категория..." type="text">
+            <select class="form-control" id="operation-category">
+                <!-- Категории подтянутся из JS -->
+                <div class="text-danger small" id="error-category"></div>
+            </select>
         </div>
         <div class="mb-2">
-            <input class="form-control" placeholder="Сумма в $..." type="number">
+            <input class="form-control" id="operation-amount" placeholder="Сумма в $..." type="number">
+            <div class="text-danger small" id="error-amount"></div>
         </div>
         <div class="mb-2">
-            <input class="form-control" placeholder="Дата..." type="date">
+            <input class="form-control" id="operation-date" placeholder="Дата..." type="date">
+            <div class="text-danger small" id="error-date"></div>
         </div>
         <div class="mb-3">
-            <input class="form-control" placeholder="Комментарий..." type="text">
+            <input class="form-control" id="operation-comment" placeholder="Комментарий..." type="text">
+            <div class="text-danger small" id="error-comment"></div>
         </div>
 
         <div class="d-flex gap-2">
-            <button class="btn btn-success px-4" type="submit">Создать</button>
-            <button class="btn btn-danger px-4" type="button">Отмена</button>
+            <button class="btn btn-success px-4" id="submit-btn" type="button">Создать</button>
+            <button class="btn btn-danger px-4" id="cancel-btn" type="button">Отмена</button>
         </div>
     </form>
+    <div class="text-danger mt-2" id="form-error-message"></div>
 </div>

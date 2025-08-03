@@ -182,6 +182,7 @@ export class Form {
                         fullName: `${result.user.name} ${result.user.lastName}`,
                         userId: result.user.id
                     });
+                    await new Promise(r => setTimeout(r, 100)); //
                     this.openNewRoute('/');
                 } else {
                     throw new Error(result?.message || 'Неверный email или пароль');

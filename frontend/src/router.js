@@ -26,7 +26,6 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: async () => {
                     await new Promise(resolve => setTimeout(resolve, 50));
-                    new Sidebar();
                     new Dashboard();
 
                 }
@@ -38,6 +37,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new CategoryProfit();
+                    new Dashboard();
                 }
             },
             {
@@ -47,6 +47,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new CategoryCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -56,6 +57,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new CreateProfit();
+                    new Dashboard();
                 }
             },
             {
@@ -65,6 +67,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new EditProfit();
+                    new Dashboard();
                 }
             },
             {
@@ -74,6 +77,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new CreateCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -83,6 +87,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new EditCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -92,6 +97,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new ProfitCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -101,6 +107,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new CreateProfitCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -110,6 +117,7 @@ export class Router {
                 userLayout: '/templates/layout.html',
                 load: () => {
                     new EditProfitCosts();
+                    new Dashboard();
                 }
             },
             {
@@ -153,20 +161,23 @@ export class Router {
 
     async clickHandler(e) {
         let element = null;
+
         if (e.target.nodeName === 'A') {
             element = e.target;
-        } else if (e.target.parentNode.nodeName === 'A') {
-            element = e.target.parentNode;
+        } else if (e.target.closest('a')) {
+            element = e.target.closest('a');
         }
 
         if (element) {
-            e.preventDefault();
-            const url = element.href.replace(window.location.origin, '');
+            const href = element.getAttribute('href');
 
-            if (!url || url === '#' || url.startsWith('javascript:void(0);')) {
-
+            // игнорируем якорные ссылки (например, #collapseCategories)
+            if (!href || href.startsWith('#') || href.startsWith('javascript:')) {
+                return;
             }
 
+            e.preventDefault();
+            const url = href.replace(window.location.origin, '');
             await this.openNewRoute(url);
         }
     }
@@ -184,7 +195,7 @@ export class Router {
         const newRoute = this.routes.find(item => item.route === urlRoute);
         const accessToken = localStorage.getItem('accessToken');
 
-        // 🔒 Защита: если нет токена и пытаемся попасть на закрытую страницу — редирект на /login
+        //  Защита: если нет токена и пытаемся попасть на закрытую страницу — редирект на /login
         if (!accessToken && newRoute && newRoute.userLayout) {
             history.replaceState({}, '', '/login');
             await this.activateRoute();
@@ -209,7 +220,6 @@ export class Router {
                 // Загружаем шаблон страницы
                 contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(res => res.text());
 
-                // Ожидаем, пока DOM обновится, и только потом вызываем load
                 if (newRoute.load && typeof newRoute.load === 'function') {
                     requestAnimationFrame(() => {
                         newRoute.load();
